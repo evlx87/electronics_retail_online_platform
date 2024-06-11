@@ -1,9 +1,9 @@
 from rest_framework.routers import DefaultRouter
 
-from electronic_network.apps import ElectronicNetworkConfig
-from electronic_network.views import SupplierViewSet, ProductViewSet, ContactViewSet
+from retail_platform.apps import RetailPlatformConfig
+from retail_platform.views import SupplierViewSet, ProductViewSet, ContactViewSet
 
-app_name = ElectronicNetworkConfig.name
+app_name = RetailPlatformConfig.name
 
 router = DefaultRouter()
 router.register(r'supplier', SupplierViewSet, basename='supplier')
