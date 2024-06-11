@@ -9,12 +9,15 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
+import os
 from pathlib import Path
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+get_env = os.path.join(BASE_DIR, '.env')
+load_dotenv(dotenv_path=get_env)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -82,8 +85,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.getenv('DB_NAME'),  # Название БД
+        'USER': os.getenv('DB_USER'),  # Пользователь для подключения
+        'PASSWORD': os.getenv('DB_PASSWORD'),  # Пароль для этого пользователя
+        'HOST': os.getenv('DB_HOST'),  # Адрес, на котором развернут сервер БД
+        'PORT': os.getenv('DB_PORT'),  # Порт, на котором работает сервер БД
     }
 }
 
